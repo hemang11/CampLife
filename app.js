@@ -7,7 +7,11 @@ var methodOverride=require('method-override');
 var seedDb=require('./models/seed');
 var flash=require('connect-flash');
 
-mongoose.connect("mongodb://localhost/yelp_camp",{ useNewUrlParser: true, useUnifiedTopology: true}); // connect to mongodb locally
+// Connect to DB Atlas
+mongoose.connect('mongodb+srv://Hemang:Hemang%40123@camplife.ogzpk.mongodb.net/camplife?retryWrites=true&w=majority',{useNewUrlParser: true});
+//const client = MongoClient('mongodb+srv://Hemang:Hemang%40123@camplife.ogzpk.mongodb.net/camplife?retryWrites=true&w=majority', { useUnifiedTopology: true });
+mongoose.set('useFindAndModify', false);
+//mongoose.connect("mongodb://localhost/yelp_camp",{ useNewUrlParser: true, useUnifiedTopology: true}); // connect to mongodb locally
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
 app.use(express.static(__dirname+'/public'));
