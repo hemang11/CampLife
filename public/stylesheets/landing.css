@@ -2,9 +2,11 @@ body {
     background-color: #000;
   }
 
-  h1 {
+  .h1 {
     font-size: 4em;
     text-shadow: 2px 2px 10px black;
+    margin-bottom:2rem;
+    color: #fff;
   }
   
   #landing-header {
@@ -14,10 +16,19 @@ body {
     padding-top: 40vh; /* view height */
   }
 
-  #landing-header h1 {
-    color: #fff;
+  .color{
+    background-color:white;
+    font-weight:500;
+    color:rgb(45, 163, 192);
+  }
+  .color:hover{
+    transform:scale(1.20);
+    background-color:rgb(45, 163, 192);
+    font-weight:400;
+    color:white;
   }
 
+  /* Animation from here */
   .slideshow { 
     position: fixed;
     width: 100%;
@@ -84,16 +95,20 @@ body {
   /* Older browser support - .no-cssanimations class added by modernizr */
 .no-cssanimations .slideshow li {
 	opacity: 1;
+} 
+
+
+@media (max-width:700px){
+  .h1{
+    font-size:45px;
+    margin-top:-10%;
+  }
+  .btn{
+    transform:scale(0.8);
+  }
+  .btn:hover{
+    transform:scale(0.96);
+  }
 }
 
-.color{
-  background-color:white;
-  font-weight:500;
-  color:rgb(45, 163, 192);
-}
-.color:hover{
-  transform:scale(1.20);
-  background-color:rgb(45, 163, 192);
-  font-weight:400;
-  color:white;
-}
+
