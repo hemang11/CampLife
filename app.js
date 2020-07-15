@@ -8,8 +8,8 @@ var seedDb=require('./models/seed');
 var flash=require('connect-flash');
 
 // Connect to DB Atlas
-mongoose.connect('mongodb+srv://Hemang:Hemang%40123@camplife.ogzpk.mongodb.net/camplife?retryWrites=true&w=majority',{useNewUrlParser: true});
-//const client = MongoClient('mongodb+srv://Hemang:Hemang%40123@camplife.ogzpk.mongodb.net/camplife?retryWrites=true&w=majority', { useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://Hemang:<Password of mongoDb>@camplife.ogzpk.mongodb.net/camplife?retryWrites=true&w=majority',{useNewUrlParser: true});
+//const client = MongoClient('mongodb+srv://Hemang:<Password of mongoDB>@camplife.ogzpk.mongodb.net/camplife?retryWrites=true&w=majority', { useUnifiedTopology: true });
 mongoose.set('useFindAndModify', false);
 
 // Localhost MongoDb
