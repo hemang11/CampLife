@@ -21,7 +21,6 @@ var middleware=require('../middleware/index');
     router.get("/campgrounds", function (req, res) {
         var perPage = 8;
         var pageQuery = parseInt(req.query.page); // page Query is the page number on which you are
-         //console.log(pageQuery);
         var pageNumber = pageQuery ? pageQuery : 1; // if pageQuery is NaN for the home <page></page> then pageQuery is 1
         Campground.find({}).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function (err, allCampgrounds) {
             Campground.count().exec(function (err, count) {
@@ -57,10 +56,6 @@ router.post("/campgrounds",middleware.isLoggedIn,function(req,res){
     // create a new campground and save to databse
     Campground.create(obj,function(err,camp){
         if(err)console.log(err);
-        else{
-            //console.log("Campground added");
-            //console.log(camp);
-        }
     })
     res.redirect("/campgrounds");
      
