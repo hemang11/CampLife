@@ -10,8 +10,14 @@ const dotenv = require('dotenv')
 dotenv.config();
 
 // Connect to DB Atlas
+<<<<<<< HEAD
 mongoose.connect(process.env.DB_url,{useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set('useFindAndModify', true);
+=======
+mongoose.connect('mongodb+srv://Hemang:<Password of mongoDb>@camplife.ogzpk.mongodb.net/camplife?retryWrites=true&w=majority',{useNewUrlParser: true});
+//const client = MongoClient('mongodb+srv://Hemang:<Password of mongoDB>@camplife.ogzpk.mongodb.net/camplife?retryWrites=true&w=majority', { useUnifiedTopology: true });
+mongoose.set('useFindAndModify', false);
+>>>>>>> 8dfde37d863ab8d7ce990677c38bb06a7c99138b
 
 // Localhost MongoDb
 //mongoose.connect("mongodb://localhost/yelp_camp",{ useNewUrlParser: true, useUnifiedTopology: true}); // connect to mongodb locally
@@ -66,5 +72,10 @@ app.use(indexRoutes);
 // Server Side.........
 var PORT=process.env.PORT || 5000;
 app.listen(PORT,process.env.IP,function(){  // can run on any port
+<<<<<<< HEAD
 	console.log(`Our CampLife server has started on Port ${PORT}`);
 });
+=======
+	console.log("Our CampLife server has started");
+});
+>>>>>>> 8dfde37d863ab8d7ce990677c38bb06a7c99138b
