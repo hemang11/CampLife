@@ -66,10 +66,5 @@ app.use(indexRoutes);
 // Server Side.........
 var PORT=process.env.PORT || 5000;
 app.listen(PORT,process.env.IP,function(){  // can run on any port
-<<<<<<< HEAD
 	console.log(`Our CampLife server has started on Port ${PORT}`);
 });
-=======
-	console.log("Our CampLife server has started");
-});
->>>>>>> 8dfde37d863ab8d7ce990677c38bb06a7c99138b
