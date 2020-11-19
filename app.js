@@ -6,11 +6,12 @@ var mongoose=require('mongoose');
 var methodOverride=require('method-override');
 var seedDb=require('./models/seed');
 var flash=require('connect-flash');
+const dotenv = require('dotenv')
+dotenv.config();
 
 // Connect to DB Atlas
-mongoose.connect('mongodb+srv://Hemang:Hemang%40123@camplife.ogzpk.mongodb.net/camplife?retryWrites=true&w=majority',{useNewUrlParser: true});
-//const client = MongoClient('mongodb+srv://Hemang:Hemang%40123@camplife.ogzpk.mongodb.net/camplife?retryWrites=true&w=majority', { useUnifiedTopology: true });
-mongoose.set('useFindAndModify', false);
+mongoose.connect(process.env.DB_url,{useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.set('useFindAndModify', true);
 
 // Localhost MongoDb
 //mongoose.connect("mongodb://localhost/yelp_camp",{ useNewUrlParser: true, useUnifiedTopology: true}); // connect to mongodb locally
@@ -65,5 +66,5 @@ app.use(indexRoutes);
 // Server Side.........
 var PORT=process.env.PORT || 5000;
 app.listen(PORT,process.env.IP,function(){  // can run on any port
-	console.log("Our CampLife server has started");
+	console.log(`Our CampLife server has started on Port ${PORT}`);
 });

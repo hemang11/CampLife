@@ -2,7 +2,8 @@ var express=require('express');
 var router=express.Router();
 var User=require('../models/user');
 var passport=require('passport');
-
+var dotenv = require('dotenv');
+dotenv.config();
 // root
 router.get('/',(req,res)=> res.render('landing'));
 
@@ -16,9 +17,18 @@ router.get("/landing",function(req,res){
 router.get("/register",function(req,res){
     res.render("register");
 });
+
 // SignUp logic
 router.post("/register",function(req,res){
+
     var newUser=new User({username:req.body.username});
+    
+    // Check for Admin
+    if(req.body.username === process.env.user && req.body.password === process.env.pass)
+    {
+        newUser.isAdmin = true;
+    }
+
     User.register(newUser,req.body.password,function(err,user){
         if(err){
             req.flash("error",err.message);  // we are just displaying the err (easy method given by passport)

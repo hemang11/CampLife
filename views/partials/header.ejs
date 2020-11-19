@@ -33,7 +33,12 @@
           <li class="nav-item active">
             <a class="nav-link" href="/register">SignUp</a>
           </li>
-        <% }else{%>
+        <% }else if(currentUser.isAdmin){%>
+          <li><a href="#" class="nav nav-link active">ADMIN</a></li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+        <% }else{ %>
           <li><a href="#" class="nav nav-link active">Signed in as <%=currentUser.username%></a></li>
           <li class="nav-item active">
             <a class="nav-link" href="/logout">Logout</a>

@@ -42,7 +42,7 @@
 
                     <p><%=campground.description%></p>
                     <p><em>Submitted By <%=campground.author.username%></em></p>
-                    <% if(currentUser && campground.author.id.equals(currentUser._id)){%> <!--currentUser is available due to earlier global use-->
+                    <% if(currentUser && campground.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){%> <!--currentUser is available due to earlier global use-->
                     <a class="btn btn-info" href="/campgrounds/<%=campground._id%>/edit">Edit</a>
                     <form class="d-inline-block ml-2" action="/campgrounds/<%=campground._id%>?_method=DELETE" method="POST">
                         <button class="btn btn-danger">Delete</button>
@@ -65,7 +65,7 @@
                         <p>
                             <%=comment.text%>
                         </p>
-                        <% if(currentUser && comment.author.id.equals(currentUser._id)){%> <!--Authorisation for comment-->
+                        <% if(currentUser && comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){%> <!--Authorisation for comment-->
                         <a class="btn btn-sm btn-warning mr-2" href="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>/edit">Edit</a>
                         <form class="d-inline-block" action="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
                             <button class="btn btn-danger btn-sm">Delete</button>
@@ -73,7 +73,7 @@
                     <%}%>
                     </div>
                 </div>
-                <%})%>
+                <% }) %>
             </div>
         </div>
     </div>

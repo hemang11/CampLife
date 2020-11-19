@@ -22,20 +22,42 @@ var middleware=require('../middleware/index');
         var perPage = 8;
         var pageQuery = parseInt(req.query.page); // page Query is the page number on which you are
          //console.log(pageQuery);
-        var pageNumber = pageQuery ? pageQuery : 1; // if pageQuery is NaN for the home <page></page> then pageQuery is 1
-        Campground.find({}).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function (err, allCampgrounds) {
-            Campground.count().exec(function (err, count) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    res.render("campground/index", {
-                        campgrounds: allCampgrounds,
-                        current: pageNumber,
-                        pages: Math.ceil(count / perPage)
-                    });
-                }
+         var pageNumber = pageQuery ? pageQuery : 1; // if pageQuery is NaN for the home <page></page> then pageQuery is 1
+
+        // Fuzzy-Search
+        if(req.query.search)
+        {
+            const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+            Campground.find({name: regex}).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function(err, allCampgrounds){
+                Campground.countDocuments().exec(function (err, count) {
+                    if(err){
+                            console.log(err);
+                        } 
+                    else {
+                        res.render("campground/index",{
+                            campgrounds:allCampgrounds,
+                            current:pageNumber,
+                            pages: Math.ceil(count/perPage)
+                            });
+                        }
+                });
+             });
+
+        }else{
+            Campground.find({}).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function (err, allCampgrounds) {
+                Campground.countDocuments().exec(function (err, count) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        res.render("campground/index", {
+                            campgrounds: allCampgrounds,
+                            current: pageNumber,
+                            pages: Math.ceil(count / perPage)
+                        });
+                    }
+                });
             });
-        });
+        }
     });
 
 // New - route
@@ -148,5 +170,11 @@ router.delete("/campgrounds/:id",middleware.checkCampgroundOwnership,function(re
 //     }
 //     res.redirect("/login")
 // }
+
+
+// To do Fuzzy-Search we have to include this
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 
 module.exports=router;

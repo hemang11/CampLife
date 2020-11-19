@@ -4,6 +4,7 @@ var Comment=require('../models/comment');
 var middlewareObj={};
 // we are adding all the middleware functions inside an object and exporting it
 middlewareObj.checkCampgroundOwnership=function(req,res,next){
+        // console.log(req)
         if(req.isAuthenticated()){
             Campground.findById(req.params.id,function(err,found_campground){
                 if(err || !found_campground){
@@ -13,7 +14,7 @@ middlewareObj.checkCampgroundOwnership=function(req,res,next){
                 else{
                       // does user own campground
                       //**wrong**if(found_campground.author.id===req.user._id)  // req.user.id is a string whereas found_campground_author.id is obj
-                      if(found_campground.author.id.equals(req.user._id)){
+                      if(found_campground.author.id.equals(req.user._id) || req.user.isAdmin){
                         next(); // Move to the next code
                       }else{
                         req.flash("error","You don't have permission to do that");
@@ -36,7 +37,7 @@ middlewareObj.checkCommentOwnership=function(req,res,next){
                 }
                 else{
                       // does user own comment
-                      if(found_comment.author.id.equals(req.user._id)){
+                      if(found_comment.author.id.equals(req.user._id) || req.user.isAdmin){
                         next(); // Move to the next code
                       }else{
                         req.flash("error","You don't have permission to do that");
