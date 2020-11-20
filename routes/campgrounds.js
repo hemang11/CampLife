@@ -24,7 +24,7 @@ var middleware=require('../middleware/index');
          //console.log(pageQuery);
          var pageNumber = pageQuery ? pageQuery : 1; // if pageQuery is NaN for the home <page></page> then pageQuery is 1
 
-        // Fuzzy-Search
+        //Fuzzy-Search
         if(req.query.search)
         {
             const regex = new RegExp(escapeRegex(req.query.search), 'gi');
@@ -47,7 +47,7 @@ var middleware=require('../middleware/index');
             Campground.find({}).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function (err, allCampgrounds) {
                 Campground.countDocuments().exec(function (err, count) {
                     if (err) {
-                        console.log(err);
+                        console.log('###### Error Here #######',err);
                     } else {
                         res.render("campground/index", {
                             campgrounds: allCampgrounds,

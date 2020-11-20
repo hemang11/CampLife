@@ -10,8 +10,14 @@ const dotenv = require('dotenv')
 dotenv.config();
 
 // Connect to DB Atlas
-mongoose.connect(process.env.DB_url,{useNewUrlParser: true, useUnifiedTopology: true});
-mongoose.set('useFindAndModify', true);
+mongoose.connect('mongodb+srv://hemang11:Hemang123@cluster0.3ph7y.mongodb.net/campy?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex:true})
+    .then(()=>{
+        console.log('Connected to DB');
+    })
+    .catch(e =>{
+        console.log('Database Error');
+        console.log(e);
+    })
 
 // Localhost MongoDb
 //mongoose.connect("mongodb://localhost/yelp_camp",{ useNewUrlParser: true, useUnifiedTopology: true}); // connect to mongodb locally

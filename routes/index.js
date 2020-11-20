@@ -24,7 +24,12 @@ router.post("/register",function(req,res){
     var newUser=new User({username:req.body.username});
     
     // Check for Admin
-    if(req.body.username === process.env.user && req.body.password === process.env.pass)
+    // if(req.body.username === process.env.user && req.body.password === process.env.pass)
+    // {
+    //     newUser.isAdmin = true;
+    // }
+
+    if(req.body.username === 'admin' && req.body.password === 'admin_colt')
     {
         newUser.isAdmin = true;
     }
