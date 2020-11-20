@@ -29,7 +29,7 @@ router.post("/register",function(req,res){
     //     newUser.isAdmin = true;
     // }
 
-    if(req.body.username === 'admin' && req.body.password === 'admin_colt')
+    if(req.body.username === process.env.user && req.body.password === process.env.pass)
     {
         newUser.isAdmin = true;
     }

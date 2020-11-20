@@ -10,7 +10,7 @@ const dotenv = require('dotenv')
 dotenv.config();
 
 // Connect to DB Atlas
-mongoose.connect('mongodb+srv://hemang11:Hemang123@cluster0.3ph7y.mongodb.net/campy?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex:true})
+mongoose.connect(process.env.DB_url,{useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex:true})
     .then(()=>{
         console.log('Connected to DB');
     })
